@@ -3,33 +3,38 @@ local SoulObject = soul.SoulObject
 
 SoulObject.loaded = false
 
-SoulObject.update = function(self) end
+SoulObject.load = function(self) end
 
-SoulObject.load = function(self)
-	self.loaded = true
-end
-
-SoulObject.unload = function(self)
-	self.loaded = false
-end
+SoulObject.unload = function(self) end
 
 SoulObject.reload = function(self)
 	if self.loaded then
 		self:unload()
+		self:load()
 	end
-	self:load()
 end
+
+SoulObject.receiveEvent = function(self, event) end
 
 SoulObject.deactivate = function(self)
 	if self.loaded then
+		soul.removeObserver(self.observer)
+		
 		self:unload()
+		self.loaded = false
 	end
-	soul.objects[self] = nil
 end
 
 SoulObject.activate = function(self)
 	if not self.loaded then
+		local soulObject = self
+		self.observer = self.observer or Observer:new()
+		self.observer.receiveEvent = function(self, event)
+			soulObject:receiveEvent(event)
+		end
+		soul.addObserver(self.observer)
+		
 		self:load()
+		self.loaded = true
 	end
-	soul.objects[self] = self
 end

@@ -30,6 +30,12 @@ Thread.update = function(self)
 	end
 end
 
+Thread.receiveEvent = function(self, event)
+	if event.name == "love.update" then
+		self:update()
+	end
+end
+
 Thread.send = function(self, message)
 	self.inputChannel:push(message)
 end

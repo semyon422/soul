@@ -6,11 +6,8 @@ require("soul.Thread")
 require("soul.graphics")
 require("soul.ui")
 
-soul.objects = {}
-soul.callbacks = {}
-soul.waitingCallbacks = {}
-
 local callbackNames = {
+	"update",
 	"keypressed",
 	"keyreleased",
 	"mousepressed",
@@ -26,41 +23,24 @@ soul.init = function()
 	love.update = soul.update
 	love.draw = soul.draw
 	
+	soul.observable = Observable:new()
+	
 	for _, name in pairs(callbackNames) do
-		soul.callbacks[name] = soul.callbacks[name] or {}
-		soul.waitingCallbacks[name] = soul.waitingCallbacks[name] or {}
 		love[name] = function(...)
-			soul.inCallback = true
-			for _, callback in pairs(soul.callbacks[name]) do
-				callback(...)
-			end
-			soul.inCallback = false
-			soul.processWaitingCallbacks()
+			soul.observable:sendEvent({
+				name = "love." .. name,
+				data = {...}
+			})
 		end
 	end
 end
 
-soul.inCallback = false
-
-soul.setCallback = function(callbackName, index, callback)
-	if not soul.inCallback then
-		soul.callbacks[callbackName][index] = callback
-	else
-		soul.waitingCallbacks[callbackName][index] = callback
-	end
+soul.addObserver = function(observer)
+	soul.observable:addObserver(observer)
 end
 
-soul.unsetCallback = function(callbackName, index)
-	soul.callbacks[callbackName][index] = nil
-end
-
-soul.processWaitingCallbacks = function()
-	for _,  callbackName in ipairs(callbackNames) do
-		for index, callback in pairs(soul.waitingCallbacks[callbackName]) do
-			soul.callbacks[callbackName][index] = callback
-			soul.waitingCallbacks[callbackName][index] = nil
-		end
-	end
+soul.removeObserver = function(observer)
+	soul.observable:removeObserver(observer)
 end
 
 soul.run = function()
@@ -86,16 +66,9 @@ soul.run = function()
 		if love.graphics and love.graphics.isActive() then
 			love.graphics.clear(love.graphics.getBackgroundColor())
 			love.graphics.origin()
-			if love.draw then love.draw() end
+			love.draw()
 			love.graphics.present()
 		end
-	end
-end
-
-soul.update = function(deltaTime)
-	soul.deltaTime = deltaTime
-	for _, object in pairs(soul.objects) do
-		object:update()
 	end
 end
 
