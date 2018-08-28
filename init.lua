@@ -73,24 +73,15 @@ soul.run = function()
 end
 
 soul.draw = function()
-	local layersInit = {}
+	local objects = {}
 	for _, object in pairs(soul.graphics.objects) do
-		if object.layer and not layersInit[object.layer] then
-			layersInit[object.layer] = true
-		end
+		table.insert(objects, object)
 	end
+	table.sort(objects, function(a, b)
+		return a.layer < b.layer
+	end)
 	
-	local layers = {}
-	for layer in pairs(layersInit) do
-		table.insert(layers, layer)
-	end
-	table.sort(layers)
-	
-	for _, layer in ipairs(layers) do
-		for _, object in pairs(soul.graphics.objects) do
-			if object.layer == layer then
-				object:draw()
-			end
-		end
+	for _, object in ipairs(objects) do
+		object:draw()
 	end
 end
