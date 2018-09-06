@@ -24,14 +24,26 @@ CS.update = function(self)
 		
 		if self.binding == "h" then
 			self.one = self.screenHeight
+			self.onex = self.one
+			self.oney = self.one
 		elseif self.binding == "h" then
 			self.one = self.screenHeight
 		elseif self.binding == "min" then
 			self.one = math.min(self.screenHeight, self.screenWidth)
+			self.onex = self.one
+			self.oney = self.one
 		elseif self.binding == "max" then
 			self.one = math.max(self.screenHeight, self.screenWidth)
+			self.onex = self.one
+			self.oney = self.one
+		elseif self.binding == "all" then
+			self.one = math.min(self.screenHeight, self.screenWidth)
+			self.onex = self.screenWidth
+			self.oney = self.screenHeight
 		else
 			self.one = 1
+			self.onex = self.one
+			self.oney = self.one
 		end
 		
 		if not self.baseOne then
@@ -64,9 +76,9 @@ CS.x = function(self, X, g)
 	self:update()
 	
 	if g then
-		return (X - self:aX(self.bx)) / self.one - self.rx
+		return (X - self:aX(self.bx)) / self.onex - self.rx
 	else
-		return X / self.one
+		return X / self.onex
 	end
 end
 
@@ -75,9 +87,9 @@ CS.y = function(self, Y, g)
 	self:update()
 	
 	if g then
-		return (Y - self:aY(self.by)) / self.one - self.ry
+		return (Y - self:aY(self.by)) / self.oney - self.ry
 	else
-		return Y / self.one
+		return Y / self.oney
 	end
 end
 
@@ -86,9 +98,9 @@ CS.X = function(self, x, g)
 	self:update()
 	
 	if g then
-		return self:aX(self.bx) + (x - self.rx) * self.one
+		return self:aX(self.bx) + (x - self.rx) * self.onex
 	else
-		return x * self.one
+		return x * self.onex
 	end
 end
 
@@ -97,8 +109,8 @@ CS.Y = function(self, y, g)
 	self:update()
 	
 	if g then
-		return self:aY(self.by) + (y - self.ry) * self.one
+		return self:aY(self.by) + (y - self.ry) * self.oney
 	else
-		return y * self.one
+		return y * self.oney
 	end
 end
