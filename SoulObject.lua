@@ -2,6 +2,7 @@ soul.SoulObject = createClass()
 local SoulObject = soul.SoulObject
 
 SoulObject.loaded = false
+SoulObject.focus = "*"
 
 SoulObject.load = function(self) end
 

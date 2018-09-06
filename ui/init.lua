@@ -1,10 +1,6 @@
 soul.ui = {}
 local ui = soul.ui
 
-ui.accessableGroups = {
-	["*"] = true
-}
-
 require("soul.ui.UIObject")
 require("soul.ui.Button")
 require("soul.ui.TextButton")

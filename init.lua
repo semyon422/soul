@@ -8,6 +8,7 @@ require("soul.ui")
 
 local callbackNames = {
 	"update",
+	"textinput",
 	"keypressed",
 	"keyreleased",
 	"mousepressed",
@@ -84,4 +85,16 @@ soul.draw = function()
 	for _, object in ipairs(objects) do
 		object:draw()
 	end
+end
+
+soul.focus = {
+	["*"] = true
+}
+
+soul.cloneFocusTable = function()
+	local focus = {}
+	for key, value in pairs(soul.focus) do
+		focus[key] = value
+	end
+	return focus
 end

@@ -2,7 +2,7 @@ soul.ui.Button = createClass(soul.ui.UIObject)
 local Button = soul.ui.Button
 
 Button.receiveEvent = function(self, event)
-	if event.name == "love.mousepressed" then
+	if soul.focus[self.focus] and event.name == "love.mousepressed" then
 		local mx, my = event.data[1], event.data[2]
 		local x = self.cs:X(self.x, true)
 		local y = self.cs:Y(self.y, true)
