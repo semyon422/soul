@@ -13,7 +13,7 @@ Text.getY = function(self, lineCount)
 end
 
 Text.draw = function(self)
-	self.scale = self.cs.one / self.cs.baseOne
+	self.scale = self.baseScale or self.cs.one / self.cs.baseOne
 	
 	local limit = self.cs:X(self.limit) / self.scale
 	
