@@ -3,6 +3,7 @@ soul = {}
 require("soul.SoulObject")
 require("soul.CS")
 require("soul.Thread")
+require("soul.Async")
 require("soul.graphics")
 require("soul.ui")
 
