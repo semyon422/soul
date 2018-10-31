@@ -1,6 +1,18 @@
 soul.SoulObject = createClass()
 local SoulObject = soul.SoulObject
 
+SoulObject.construct = function(self)
+	self.observable = self.observable or Observable:new()
+	self.sendEvent = function(self, event)
+		self.observable:sendEvent(event)
+	end
+	
+	self.observer = self.observer or Observer:new()
+	self.observer.receiveEvent = function(_, event)
+		self:receiveEvent(event)
+	end
+end
+
 SoulObject.loaded = false
 SoulObject.focus = "*"
 
@@ -15,6 +27,7 @@ SoulObject.reload = function(self)
 	end
 end
 
+SoulObject.sendEvent = function(self, event) end
 SoulObject.receiveEvent = function(self, event) end
 
 SoulObject.deactivate = function(self)
@@ -24,18 +37,17 @@ SoulObject.deactivate = function(self)
 		self:unload()
 		self.loaded = false
 	end
+	
+	return self
 end
 
 SoulObject.activate = function(self)
 	if not self.loaded then
-		local soulObject = self
-		self.observer = self.observer or Observer:new()
-		self.observer.receiveEvent = function(self, event)
-			soulObject:receiveEvent(event)
-		end
 		soul.addObserver(self.observer)
 		
 		self:load()
 		self.loaded = true
 	end
+	
+	return self
 end
