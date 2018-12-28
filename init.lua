@@ -31,6 +31,7 @@ soul.init = function()
 		love[name] = function(...)
 			soul.observable:sendEvent({
 				name = "love." .. name,
+				callback = function(self, ...) love[name](...) end,
 				data = {...}
 			})
 		end

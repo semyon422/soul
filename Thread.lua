@@ -3,7 +3,7 @@ local Thread = soul.Thread
 
 Thread.load = function(self)
 	self.thread = love.thread.newThread(
-		"threadName = " .. self.threadName .. "\n" ..
+		"threadName = \"" .. self.threadName .. "\"\n" ..
 		self:getThreadFunctionHeader() ..
 		self.threadFunction ..
 		self.threadFunctionFooter
