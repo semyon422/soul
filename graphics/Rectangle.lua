@@ -3,6 +3,8 @@ local Rectangle = soul.graphics.Rectangle
 
 Rectangle.draw = function(self)
 	self:switchColor(true)
+	self:switchLineWidth(true)
+	self:switchLineStyle(true)
 	
 	love.graphics.rectangle(
 		self.mode,
@@ -13,4 +15,6 @@ Rectangle.draw = function(self)
 	)
 	
 	self:switchColor()
+	self:switchLineWidth()
+	self:switchLineStyle()
 end

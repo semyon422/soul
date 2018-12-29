@@ -3,6 +3,8 @@ local Circle = soul.graphics.Circle
 
 Circle.draw = function(self)
 	self:switchColor(true)
+	self:switchLineWidth(true)
+	self:switchLineStyle(true)
 	
 	love.graphics.circle(
 		self.mode,
@@ -12,4 +14,6 @@ Circle.draw = function(self)
 	)
 	
 	self:switchColor()
+	self:switchLineWidth()
+	self:switchLineStyle()
 end

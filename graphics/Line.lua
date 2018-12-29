@@ -1,13 +1,13 @@
-soul.graphics.Polygon = createClass(soul.graphics.GraphicalObject)
-local Polygon = soul.graphics.Polygon
+soul.graphics.Line = createClass(soul.graphics.GraphicalObject)
+local Line = soul.graphics.Line
 
-Polygon.draw = function(self)
+Line.draw = function(self)
 	self:switchColor(true)
 	self:switchLineWidth(true)
 	self:switchLineStyle(true)
 	
-	local vertices = {}
-	for i, v in ipairs(self.vertices) do
+	local points = {}
+	for i, v in ipairs(self.points) do
 		if i % 2 == 1 then
 			points[i] = self.cs:X(v, true)
 		else
@@ -15,7 +15,7 @@ Polygon.draw = function(self)
 		end
 	end
 	
-	love.graphics.polygon(self.mode, vertices)
+	love.graphics.line(points)
 	
 	self:switchColor()
 	self:switchLineWidth()

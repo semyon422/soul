@@ -30,3 +30,17 @@ GraphicalObject.switchFont = function(self, state)
 		self.oldFont = nil
 	end
 end
+
+GraphicalObject.switchLineStyle = function(self, state)
+	if state and self.lineStyle then
+		self.oldLineStyle = love.graphics.getLineStyle()
+		love.graphics.setLineStyle(self.lineStyle)
+	elseif not state and self.oldLineStyle then
+		love.graphics.setLineStyle(self.oldLineStyle)
+		self.oldLineStyle = nil
+	end
+end
+
+GraphicalObject.switchLineWidth = function(self, state)
+	love.graphics.setLineWidth(state and self.lineWidth or 1)
+end
