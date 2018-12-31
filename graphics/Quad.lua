@@ -12,8 +12,8 @@ Quad.draw = function(self)
 		self.r,
 		self.sx,
 		self.sy,
-		self.cs:X(self.ox),
-		self.cs:X(self.oy)
+		self.ox and self.cs:X(self.ox),
+		self.oy and self.cs:X(self.oy)
 	)
 	
 	self:switchColor()

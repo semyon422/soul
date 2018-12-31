@@ -11,8 +11,8 @@ Drawable.draw = function(self)
 		self.r,
 		self.sx,
 		self.sy,
-		self.cs:X(self.ox),
-		self.cs:Y(self.oy)
+		self.ox and self.cs:X(self.ox),
+		self.oy and self.cs:Y(self.oy)
 	)
 	
 	self:switchColor()

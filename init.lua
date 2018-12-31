@@ -20,6 +20,14 @@ local callbackNames = {
 	"quit"
 }
 
+soul.cses = {}
+
+soul.updateCses = function()
+	for cs in pairs(soul.cses) do
+		cs:update()
+	end
+end
+
 soul.init = function()
 	love.run = soul.run
 	love.update = soul.update
@@ -62,6 +70,8 @@ soul.run = function()
 				love.handlers[name](a,b,c,d,e,f)
 			end
 		end
+		
+		soul.updateCses()
 		
 		love.timer.step()
 		love.update(love.timer.getDelta())

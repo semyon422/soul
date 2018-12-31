@@ -34,8 +34,8 @@ Text.draw = function(self)
 		self.r,
 		self.scale,
 		self.scale,
-		self.cs:X(self.ox),
-		self.cs:Y(self.oy),
+		self.ox and self.cs:X(self.ox),
+		self.oy and self.cs:Y(self.oy),
 		self.kx,
 		self.ky
 	)
