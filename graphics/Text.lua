@@ -22,10 +22,10 @@ Text.draw = function(self)
 	
 	local y = self:getY(lineCount)
 	
-	self:switchColor(true)
-	self:switchFont(true)
+	self:switchColor()
+	self:switchFont()
 	
-	love.graphics.printf(
+	return love.graphics.printf(
 		{self.color, self.text},
 		self.cs:X(self.x, true),
 		y,
@@ -39,7 +39,4 @@ Text.draw = function(self)
 		self.kx,
 		self.ky
 	)
-	
-	self:switchColor()
-	self:switchFont()
 end

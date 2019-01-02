@@ -10,9 +10,9 @@ PointSet.construct = function(self, maxsprites)
 end
 
 PointSet.draw = function(self)
-	self:switchColor(true)
-	self:switchLineWidth(true)
-	self:switchLineStyle(true)
+	self:switchColor()
+	self:switchLineWidth()
+	self:switchLineStyle()
 	
 	self.spriteBatch:clear()
 	
@@ -28,9 +28,5 @@ PointSet.draw = function(self)
 		)
 	end
 	
-	love.graphics.draw(self.spriteBatch, 0, 0)
-	
-	self:switchColor()
-	self:switchLineWidth()
-	self:switchLineStyle()
+	return love.graphics.draw(self.spriteBatch, 0, 0)
 end

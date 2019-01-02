@@ -2,9 +2,9 @@ soul.graphics.Polygon = createClass(soul.graphics.GraphicalObject)
 local Polygon = soul.graphics.Polygon
 
 Polygon.draw = function(self)
-	self:switchColor(true)
-	self:switchLineWidth(true)
-	self:switchLineStyle(true)
+	self:switchColor()
+	self:switchLineWidth()
+	self:switchLineStyle()
 	
 	local vertices = {}
 	for i, v in ipairs(self.vertices) do
@@ -15,9 +15,5 @@ Polygon.draw = function(self)
 		end
 	end
 	
-	love.graphics.polygon(self.mode, vertices)
-	
-	self:switchColor()
-	self:switchLineWidth()
-	self:switchLineStyle()
+	return love.graphics.polygon(self.mode, vertices)
 end

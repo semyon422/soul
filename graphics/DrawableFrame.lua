@@ -33,9 +33,9 @@ end
 DrawableFrame.draw = function(self)
 	self:updateScale()
 	self:updateOffsets()
-	self:switchColor(true)
+	self:switchColor()
 	
-	love.graphics.draw(
+	return love.graphics.draw(
 		self.drawable,
 		self.cs:X(self.x, true) + self.ox,
 		self.cs:Y(self.y, true) + self.oy,
@@ -43,6 +43,4 @@ DrawableFrame.draw = function(self)
 		self.scale,
 		self.scale
 	)
-	
-	self:switchColor()
 end

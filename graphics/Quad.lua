@@ -2,9 +2,9 @@ soul.graphics.Quad = createClass(soul.graphics.GraphicalObject)
 local Quad = soul.graphics.Quad
 
 Quad.draw = function(self)
-	self:switchColor(true)
+	self:switchColor()
 	
-	love.graphics.draw(
+	return love.graphics.draw(
 		self.drawable,
 		self.quad,
 		self.cs:X(self.x, true),
@@ -15,6 +15,4 @@ Quad.draw = function(self)
 		self.ox and self.cs:X(self.ox),
 		self.oy and self.cs:X(self.oy)
 	)
-	
-	self:switchColor()
 end
