@@ -13,3 +13,5 @@ require("soul.graphics.TextFrame")
 require("soul.graphics.Quad")
 require("soul.graphics.Polygon")
 require("soul.graphics.Line")
+
+require("soul.graphics.PointSet")
