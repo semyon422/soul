@@ -4,12 +4,12 @@ local SoulObject = soul.SoulObject
 SoulObject.construct = function(self)
 	self.observable = self.observable or Observable:new()
 	self.sendEvent = function(self, event)
-		self.observable:sendEvent(event)
+		return self.observable:sendEvent(event)
 	end
 	
 	self.observer = self.observer or Observer:new()
 	self.observer.receiveEvent = function(_, event)
-		self:receiveEvent(event)
+		return self:receiveEvent(event)
 	end
 end
 
@@ -25,6 +25,8 @@ SoulObject.reload = function(self)
 		self:unload()
 		self:load()
 	end
+	
+	return self
 end
 
 SoulObject.sendEvent = function(self, event) end
